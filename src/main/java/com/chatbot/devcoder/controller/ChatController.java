@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chatbot.devcoder.model.ChatSession;
 import com.chatbot.devcoder.service.ChatService;
@@ -20,6 +22,7 @@ public class ChatController {
 		this.chatService = chatService;
 	}
 
+	// home page - empty chat, sidebar shows all sessions
 	@GetMapping("/")
 	public String home(Model model) //model :-> it's inbuilt class which is used to transfer data to backend to fronted(thymelef)
 	{
@@ -32,7 +35,7 @@ public class ChatController {
 	}
 	
 	
-	
+	 // click sidebar item - open that session
 	@GetMapping("/session/{id}")
 	public String openSession(@PathVariable Long id, Model model)
 	{
@@ -44,10 +47,34 @@ public class ChatController {
 		model.addAttribute("sessions", sessions);
 		model.addAttribute("current", current);
 		
-		
 		return "chat";
-		
 	}
 	
 	
+	
+	 // send new message
+	@PostMapping("/chat")
+	public String chat(@RequestParam String message, Model model)
+	{
+		// ask AI and save to MySQL
+		ChatSession current = chatService.askAI(message);
+		
+		// reload all sessions for sidebar
+	
+		List<ChatSession> sessions = chatService.getAllSessions();
+		
+		model.addAttribute("sessions", sessions);
+		model.addAttribute("current", current);
+		return "chat";
+	}
+	
+	
+	
+	@PostMapping("/chat/delete/{id}")
+	public String deleteChat(@PathVariable Long id) 
+	{
+		chatService.deleteConversation(id);
+		return "redirect:/";
+		
+	}
 }

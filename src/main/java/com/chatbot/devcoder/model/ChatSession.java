@@ -26,23 +26,23 @@ public class ChatSession {
 	private String answer;
 	
 	private LocalDateTime createdAt;
+	
+	
+	  public ChatSession(String question) {
+	        this.question = question;
+	        this.createdAt = LocalDateTime.now();
+	    }
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
+	
 	public String getAnswer() {
 		return answer;
 	}
@@ -55,9 +55,6 @@ public class ChatSession {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
 
 
 	
