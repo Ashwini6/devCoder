@@ -26,7 +26,7 @@ public class OllamaService {
 	    {
 	    	try {
 	    		Map<String, Object> requestMap = new HashMap<>();
-	            requestMap.put("model", "deepseek-coder");
+	            requestMap.put("model", "llama3.2");
 	            requestMap.put("prompt", prompt);
 	            requestMap.put("stream", false);
 	            
