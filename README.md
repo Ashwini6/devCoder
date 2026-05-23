@@ -158,7 +158,7 @@ Responsible for:
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/devCoder.git
+git clone https://github.com/Ashwini6/devCoder.git
 ```
 
 ---
